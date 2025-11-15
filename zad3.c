@@ -1,30 +1,30 @@
 #include<stdio.h>
-#include<wctype.h>
 #include<wchar.h>
+#include<locale.h>
+void funkcia (wchar_t simvol, int dlina, int stroki)
+{
+    for (int i = 0; i < stroki; i++)
+    {
+        for (int j = 0; j < dlina; j++)
+        {
+            wprintf(L"%lc", simvol);
+        }
+        wprintf(L"\n");
+    }
+}
+
 int main(void)
 {
-    int count_propis = 0;
-    int count_stroch = 0;
-    int count_ost = 0;
-    wint_t ch;
-    wprintf("Введите текст(Ctrl+D для завершения):\n");
-    while ((ch = getwchar()) != WEOF)
-    {
-        if (iswupper(ch))
-        {
-            count_propis++;
-        }
-        else if (iswlower(ch))
-        {
-            count_stroch++;
-        }
-        else
-        {
-            count_ost++;
-        }
-    }
-    wprintf("Кол-во прописных букв = %d\n", count_propis);
-    wprintf("Кол-во строчных букв = %d\n", count_stroch);
-    wprintf("Кол-во остальных символов = %d\n", count_ost);
+    setlocale(LC_ALL, "");
+    wchar_t simvol;
+    int dlina, stroki;
+    wprintf(L"Введите символ: ");
+    wscanf(L"%lc", &simvol);
+    wprintf("Введите длину: ");
+    wscanf(L"%d", &dlina);
+    wprintf("Введите кол-во строк: ");
+    wscanf(L"%d", &stroki);
+    wprintf("\nРезультат\n");
+    funkcia(simvol, dlina, stroki);
     return 0;
 }
